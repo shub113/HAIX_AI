@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-export function SelectButton({ buttonStyle = "", onButtonClick = () => {} }) {
+export function SelectButton({ children, buttonStyle = "", onButtonClick = () => {} }) {
     const [isSelected, setIsSelected] = useState(false);
 
     const buttonClass = twMerge(
@@ -13,12 +13,16 @@ export function SelectButton({ buttonStyle = "", onButtonClick = () => {} }) {
     return (
         <button
             onClick={() => {
-                setIsSelected((prev) => !prev);
-                onButtonClick();
+                setIsSelected((prev) => {
+                    if (!prev) {
+                        onButtonClick();
+                    }
+                    return !prev;
+                });
             }}
             className={buttonClass}
         >
-            Button
+            {children}
         </button>
     );
 }
