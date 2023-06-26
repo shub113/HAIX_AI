@@ -7,6 +7,6 @@ export function useCustomQuery({
     },
     ...rest
 }) {
-    const { isFetching, data, error, refetch } = useQuery(key, queryFn, { ...rest });
-    return { isFetching, data, error, refetch };
+    const { isFetching, data, error, refetch, isFetched } = useQuery(key, queryFn, { ...rest });
+    return { isFetching, data, error, refetch, isFetched };
 }
